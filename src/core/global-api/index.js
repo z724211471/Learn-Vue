@@ -18,10 +18,11 @@ import {
   defineReactive
 } from '../util/index'
 
-export function initGlobalAPI (Vue: GlobalAPI) {
+export function initGlobalAPI(Vue: GlobalAPI) {
   // config
   const configDef = {}
   configDef.get = () => config
+
   if (process.env.NODE_ENV !== 'production') {
     configDef.set = () => {
       warn(
@@ -34,6 +35,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
   // exposed util methods.
   // NOTE: these are not considered part of the public API - avoid relying on
   // them unless you are aware of the risk.
+  //挂载全局api
   Vue.util = {
     warn,
     extend,
@@ -46,20 +48,22 @@ export function initGlobalAPI (Vue: GlobalAPI) {
   Vue.nextTick = nextTick
 
   // 2.6 explicit observable API
+
   Vue.observable = <T>(obj: T): T => {
     observe(obj)
-    return obj
-  }
+   return obj
+   }
+    Vue.options = Object.create(null)
 
-  Vue.options = Object.create(null)
+    //ASSET_TYPES=["component", "directive", "filter"]
   ASSET_TYPES.forEach(type => {
-    Vue.options[type + 's'] = Object.create(null)
-  })
+      Vue.options[type + 's'] = Object.create(null)
+    })
 
-  // this is used to identify the "base" constructor to extend all plain-object
-  // components with in Weex's multi-instance scenarios.
-  Vue.options._base = Vue
-
+    // this is used to identify the "base" constructor to extend all plain-object
+    // components with in Weex's multi-instance scenarios.
+    Vue.options._base = Vue
+  //把KeepAlive挂载到组件上</T>
   extend(Vue.options.components, builtInComponents)
 
   initUse(Vue)

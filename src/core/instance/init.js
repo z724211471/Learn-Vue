@@ -18,7 +18,6 @@ export function initMixin(Vue: Class<Component>) {
     const vm: Component = this
     // a uid
     vm._uid = uid++
-
     let startTag, endTag
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
@@ -77,6 +76,7 @@ export function initInternalComponent(vm: Component, options: InternalComponentO
   const opts = vm.$options = Object.create(vm.constructor.options)
   // doing this because it's faster than dynamic enumeration.
   console.log(opts);
+
   const parentVnode = options._parentVnode
   opts.parent = options.parent
   opts._parentVnode = parentVnode

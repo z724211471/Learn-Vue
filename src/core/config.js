@@ -40,6 +40,7 @@ export default ({
    * Option merge strategies (used in core/util/options)
    */
   // $flow-disable-line
+  //挂载vue的api函数
   optionMergeStrategies: Object.create(null),
 
   /**
