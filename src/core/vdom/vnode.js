@@ -1,5 +1,5 @@
 /* @flow */
-
+//定义了非常多多属性
 export default class VNode {
   tag: string | void;
   data: VNodeData | void;
