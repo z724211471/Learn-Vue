@@ -65,7 +65,7 @@ export function initGlobalAPI(Vue: GlobalAPI) {
     Vue.options._base = Vue
   //把KeepAlive挂载到组件上</T>
   extend(Vue.options.components, builtInComponents)
-
+  //执行挂载外部的函数
   initUse(Vue)
   initMixin(Vue)
   initExtend(Vue)

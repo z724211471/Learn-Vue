@@ -108,7 +108,7 @@ export function makeMap(
   expectsLowerCase ?: boolean
 ): (key: string) => true | void {
   const map = Object.create(null)
-  const list: Array<string > = str.split(',')
+  const list: Array<string> = str.split(',')
   for (let i = 0; i < list.length; i++) {
     map[list[i]] = true
   }
@@ -130,7 +130,7 @@ export const isReservedAttribute = makeMap('key,ref,slot,slot-scope,is')
 /**
  * Remove an item from an array.
  */
-export function remove(arr: Array<any > , item: any): Array<any > | void {
+export function remove(arr: Array<any> , item: any): Array<any> | void {
   if (arr.length) {
     const index = arr.indexOf(item)
     if (index > -1) {
@@ -143,7 +143,7 @@ export function remove(arr: Array<any > , item: any): Array<any > | void {
  * Check whether an object has the property.
  */
 const hasOwnProperty = Object.prototype.hasOwnProperty
-export function hasOwn(obj: Object | Array< *> , key: string): boolean {
+export function hasOwn(obj: Object | Array<*> , key: string): boolean {
   return hasOwnProperty.call(obj, key)
 }
 
@@ -215,10 +215,11 @@ export const bind = Function.prototype.bind ?
 /**
  * Convert an Array-like object to a real Array.
  */
-export function toArray(list: any, start ?: number): Array< any> {
+//生成对应的数组，并且倒序显示,也可以删除数组。
+export function toArray(list: any, start ?: number): Array<any> {
   start = start || 0
   let i = list.length - start
-  const ret: Array< any> = new Array(i)
+  const ret: Array<any> = new Array(i)
   while (i--) {
     ret[i] = list[i + start]
   }
@@ -238,7 +239,7 @@ export function extend(to: Object, _from: ? Object): Object {
 /**
  * Merge an Array of Objects into a single Object.
  */
-export function toObject(arr: Array<any > ): Object {
+export function toObject(arr: Array<any> ): Object {
   const res = {}
   for (let i = 0; i < arr.length; i++) {
     if (arr[i]) {
@@ -272,7 +273,7 @@ export const identity = (_: any) => _
 /**
  * Generate a string containing static keys from compiler modules.
  */
-export function genStaticKeys(modules: Array<ModuleOptions > ): string {
+export function genStaticKeys(modules: Array<ModuleOptions> ): string {
   return modules.reduce((keys, m) => {
     return keys.concat(m.staticKeys || [])
   }, []).join(',')
@@ -322,7 +323,7 @@ export function looseEqual(a: any, b: any): boolean {
  * found in the array (if value is a plain object, the array must
  * contain an object of the same shape), or -1 if it is not present.
  */
-export function looseIndexOf(arr: Array<mixed > , val: mixed): number {
+export function looseIndexOf(arr: Array<mixed> , val: mixed): number {
   for (let i = 0; i < arr.length; i++) {
     if (looseEqual(arr[i], val)) return i
   }

@@ -9,7 +9,7 @@ export let isUsingMicroTask = false
 
 const callbacks = []
 let pending = false
-
+//执行callbacks里面的方法 用pending控制是否执行
 function flushCallbacks() {
   pending = false
   const copies = callbacks.slice(0)
@@ -79,13 +79,14 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   }
 } else {
   // Fallback to setTimeout.
+
   timerFunc = () => {
     setTimeout(flushCallbacks, 0)
   }
 }
 
 export function nextTick(cb?: Function, ctx?: Object) {
-  console.log(ctx);
+
   let _resolve
   callbacks.push(() => {
     if (cb) {

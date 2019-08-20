@@ -149,6 +149,7 @@
   },
   "dependencies": {
     "phantomjs-prebuilt": "^2.1.14",
+    "vue-router": "^3.1.2",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.8.0"
   }
