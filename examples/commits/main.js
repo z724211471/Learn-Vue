@@ -10,6 +10,16 @@ dsa.install=function(Vue){
   })
 }
 Vue.use(dsa)
+var myMixin = {
+  created: function () {
+    this.hello()
+  },
+  methods: {
+    hello: function () {
+      console.log('hello from mixin!')
+    }
+  }
+}
 let ss=new Vue({
   el: '#app',
   data: {
@@ -27,3 +37,6 @@ let ss=new Vue({
   },
 })
 
+
+
+Vue.mixin(myMixin)

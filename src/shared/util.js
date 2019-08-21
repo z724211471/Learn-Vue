@@ -55,6 +55,7 @@ export function toRawType(value: any): string {
  * Strict object type check. Only returns true
  * for plain JavaScript objects.
  */
+//判断是否是objet类型
 export function isPlainObject(obj: any): boolean {
   return _toString.call(obj) === '[object Object]'
 }
@@ -161,6 +162,7 @@ export function cached < F: Function > (fn: F): F {
 /**
  * Camelize a hyphen-delimited string.
  */
+//对下划线后面对第一个字母转成大写
 const camelizeRE = /-(\w)/g
 export const camelize = cached((str: string): string => {
   return str.replace(camelizeRE, (_, c) => c ? c.toUpperCase() : '')

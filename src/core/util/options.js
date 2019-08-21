@@ -295,6 +295,7 @@ export function validateComponentName (name: string) {
  * Ensure all props option syntax are normalized into the
  * Object-based format.
  */
+//混入props
 function normalizeProps (options: Object, vm: ?Component) {
   const props = options.props
   if (!props) return
@@ -332,6 +333,7 @@ function normalizeProps (options: Object, vm: ?Component) {
 /**
  * Normalize all injections into Object-based format
  */
+//一个祖先组件向其所有子孙后代注入一个依赖
 function normalizeInject (options: Object, vm: ?Component) {
   const inject = options.inject
   if (!inject) return
@@ -359,6 +361,7 @@ function normalizeInject (options: Object, vm: ?Component) {
 /**
  * Normalize raw function directives into object format.
  */
+//定义指令
 function normalizeDirectives (options: Object) {
   const dirs = options.directives
   if (dirs) {
@@ -390,6 +393,8 @@ export function mergeOptions (
   child: Object,
   vm?: Component
 ): Object {
+  console.log(parent)
+  console.log(child)
   if (process.env.NODE_ENV !== 'production') {
     checkComponents(child)
   }
@@ -397,7 +402,7 @@ export function mergeOptions (
   if (typeof child === 'function') {
     child = child.options
   }
-
+//混入props
   normalizeProps(child, vm)
   normalizeInject(child, vm)
   normalizeDirectives(child)
