@@ -20,6 +20,7 @@ import {
   isBuiltInTag,
   isPlainObject
 } from 'shared/util'
+import { start } from 'repl';
 
 /**
  * Option overwriting strategies are functions that handle
@@ -27,7 +28,7 @@ import {
  * value into the final value.
  */
 const strats = config.optionMergeStrategies
-
+console.log(config.optionMergeStrategies)
 /**
  * Options with restrictions
  */
@@ -168,10 +169,13 @@ function dedupeHooks (hooks) {
   }
   return res
 }
-
+//生成所有的生命周期
+// ["beforeCreate", "created", "beforeMount", "mounted", "beforeUpdate",
+// "updated", "beforeDestroy", "destroyed", "activated", "deactivated", "errorCaptured", "serverPrefetch"]
 LIFECYCLE_HOOKS.forEach(hook => {
   strats[hook] = mergeHook
 })
+
 
 /**
  * Assets
@@ -194,7 +198,8 @@ function mergeAssets (
     return res
   }
 }
-
+//vue选项/资源API
+//["component", "directive", "filter"]
 ASSET_TYPES.forEach(function (type) {
   strats[type + 's'] = mergeAssets
 })
@@ -411,6 +416,8 @@ export function mergeOptions (
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
   // Only merged options has the _base property.
+  console.log('123');
+  //判断子级的是不是还有extends与mixins 如果有就在执行
   if (!child._base) {
     if (child.extends) {
       parent = mergeOptions(parent, child.extends, vm)
@@ -432,8 +439,11 @@ export function mergeOptions (
       mergeField(key)
     }
   }
+  //判断也没有这个api对象
   function mergeField (key) {
+    console.log(key)
     const strat = strats[key] || defaultStrat
+    console.log(strat)
     options[key] = strat(parent[key], child[key], vm, key)
   }
   return options
