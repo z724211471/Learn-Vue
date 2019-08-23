@@ -16,8 +16,11 @@ export function initExtend (Vue: GlobalAPI) {
   /**
    * Class inheritance
    */
+  //插入构造器代码
   Vue.extend = function (extendOptions: Object): Function {
     extendOptions = extendOptions || {}
+    console.log(extendOptions)
+    // console.log(this)
     const Super = this
     const SuperId = Super.cid
     const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
