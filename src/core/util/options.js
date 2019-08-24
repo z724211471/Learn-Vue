@@ -12,15 +12,15 @@ import {
 } from 'shared/constants'
 
 import {
-  extend,
-  hasOwn,
-  camelize,
-  toRawType,
-  capitalize,
+  extend,//对象合并
+  hasOwn,//判断object里面是否有这个字段
+  camelize,//下划线转后面第一个字母大写
+  toRawType,//返回当前对象的类型
+  capitalize,//首字母大写
   isBuiltInTag,
-  isPlainObject
+  isPlainObject//判断对象是否是object类型
 } from 'shared/util'
-import { start } from 'repl';
+
 
 /**
  * Option overwriting strategies are functions that handle
@@ -62,12 +62,14 @@ function mergeData (to: Object, from: ?Object): Object {
     toVal = to[key]
     fromVal = from[key]
     if (!hasOwn(to, key)) {
+      //如果对象里面没有该字段,则设置监听
       set(to, key, fromVal)
     } else if (
       toVal !== fromVal &&
       isPlainObject(toVal) &&
       isPlainObject(fromVal)
     ) {
+      //如果两个字段不相等，且两个字段都为object类型,则在执行该方法
       mergeData(toVal, fromVal)
     }
   }
@@ -347,7 +349,8 @@ function normalizeInject (options: Object, vm: ?Component) {
     for (let i = 0; i < inject.length; i++) {
       normalized[inject[i]] = { from: inject[i] }
     }
-  } else if (isPlainObject(inject)) {
+  } else if (isPlainObject(inject)) {//判断是否是object类型
+
     for (const key in inject) {
       const val = inject[key]
       normalized[key] = isPlainObject(val)
@@ -380,6 +383,7 @@ function normalizeDirectives (options: Object) {
 }
 
 function assertObjectType (name: string, value: any, vm: ?Component) {
+  //如果传入的值不是object类型就报错
   if (!isPlainObject(value)) {
     warn(
       `Invalid value for option "${name}": expected an Object, ` +
