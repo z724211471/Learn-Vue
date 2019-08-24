@@ -28,6 +28,7 @@ let ss=new Vue({
     commits: null,
     message: 'sss'
   },
+  extends:myMixin,
   created: function () {
     this.$nextTick(() => {
       console.log(this.message);
@@ -38,5 +39,5 @@ let ss=new Vue({
 })
 
 
-
+Vue.extend(myMixin)
 Vue.mixin(myMixin)

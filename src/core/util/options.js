@@ -420,7 +420,6 @@ export function mergeOptions (
   // but only if it is a raw options object that isn't
   // the result of another mergeOptions call.
   // Only merged options has the _base property.
-  console.log('123');
   //判断子级的是不是还有extends与mixins 如果有就在执行
   if (!child._base) {
     if (child.extends) {
@@ -445,9 +444,7 @@ export function mergeOptions (
   }
   //判断也没有这个api对象
   function mergeField (key) {
-    console.log(key)
     const strat = strats[key] || defaultStrat
-    console.log(strat)
     options[key] = strat(parent[key], child[key], vm, key)
   }
   return options
