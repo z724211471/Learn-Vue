@@ -67,7 +67,10 @@ export function initGlobalAPI(Vue: GlobalAPI) {
   extend(Vue.options.components, builtInComponents)
   //执行挂载外部的函数
   initUse(Vue)
+  //混入vue
   initMixin(Vue)
+  //也是混入
   initExtend(Vue)
+  //初始化选项与资源的api
   initAssetRegisters(Vue)
 }

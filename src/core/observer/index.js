@@ -45,13 +45,18 @@ export class Observer {
     this.vmCount = 0
     def(value, '__ob__', this)
     if (Array.isArray(value)) {
+      //判断是否可以使用__proto__
       if (hasProto) {
+        //把值的原型链变成数组的
         protoAugment(value, arrayMethods)
       } else {
+        //拷贝值并且监听
         copyAugment(value, arrayMethods, arrayKeys)
       }
+      //遍历监听数组的值
       this.observeArray(value)
     } else {
+      //不是数组调用
       this.walk(value)
     }
   }
@@ -61,6 +66,7 @@ export class Observer {
    * getter/setters. This method should only be called when
    * value type is Object.
    */
+  //遍历对象的key 并且进行监听
   walk (obj: Object) {
     const keys = Object.keys(obj)
     for (let i = 0; i < keys.length; i++) {
@@ -71,6 +77,7 @@ export class Observer {
   /**
    * Observe a list of Array items.
    */
+  //循环监听监听数组的值
   observeArray (items: Array<any>) {
     for (let i = 0, l = items.length; i < l; i++) {
       observe(items[i])

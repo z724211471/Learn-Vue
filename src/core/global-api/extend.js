@@ -17,6 +17,7 @@ export function initExtend (Vue: GlobalAPI) {
    * Class inheritance
    */
   //插入构造器代码
+  //且都是混入全局api
   Vue.extend = function (extendOptions: Object): Function {
     extendOptions = extendOptions || {}
     console.log(extendOptions)
@@ -36,6 +37,8 @@ export function initExtend (Vue: GlobalAPI) {
     const Sub = function VueComponent (options) {
       this._init(options)
     }
+    //原型继承vue的原型
+  //混合继承的方式
     Sub.prototype = Object.create(Super.prototype)
     Sub.prototype.constructor = Sub
     Sub.cid = cid++
@@ -83,13 +86,14 @@ export function initExtend (Vue: GlobalAPI) {
   }
 }
 
+//如果有props 则插入
 function initProps (Comp) {
   const props = Comp.options.props
   for (const key in props) {
     proxy(Comp.prototype, `_props`, key)
   }
 }
-
+//插入运算计算属性
 function initComputed (Comp) {
   const computed = Comp.options.computed
   for (const key in computed) {
