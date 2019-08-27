@@ -72,5 +72,6 @@ export function initGlobalAPI(Vue: GlobalAPI) {
   //也是混入
   initExtend(Vue)
   //初始化选项与资源的api
+  console.log('123')
   initAssetRegisters(Vue)
 }
