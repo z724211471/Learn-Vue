@@ -30,7 +30,7 @@ export default class Watcher {
   id: number;
   deep: boolean;
   user: boolean;
-  lazy: boolean;
+  lazy: boolean;//懒加载
   sync: boolean;
   dirty: boolean;
   active: boolean;

@@ -19,21 +19,21 @@ export default class Dep {
     this.id = uid++
     this.subs = []
   }
-
+//添加选项
   addSub (sub: Watcher) {
     this.subs.push(sub)
   }
-
+//移除选项
   removeSub (sub: Watcher) {
     remove(this.subs, sub)
   }
-
+//
   depend () {
     if (Dep.target) {
       Dep.target.addDep(this)
     }
   }
-
+//通知
   notify () {
 
     const subs = this.subs.slice()
