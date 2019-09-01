@@ -7,8 +7,9 @@ export function initAssetRegisters (Vue: GlobalAPI) {
   /**
    * Create asset registration methods.
    */
-  ASSET_TYPES.forEach(type => {
-    console.log(type)
+  //设置
+ ASSET_TYPES.forEach(type => {
+   console.log(type)
     Vue[type] = function (
       id: string,
       definition: Function | Object
@@ -33,3 +34,4 @@ export function initAssetRegisters (Vue: GlobalAPI) {
     }
   })
 }
+

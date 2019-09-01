@@ -28,7 +28,6 @@ import {
  * value into the final value.
  */
 const strats = config.optionMergeStrategies
-console.log(config.optionMergeStrategies)
 /**
  * Options with restrictions
  */
@@ -402,8 +401,6 @@ export function mergeOptions (
   child: Object,
   vm?: Component
 ): Object {
-  console.log(parent)
-  console.log(child)
   if (process.env.NODE_ENV !== 'production') {
     checkComponents(child)
   }
