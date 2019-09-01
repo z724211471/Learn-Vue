@@ -50,6 +50,7 @@ export default class Watcher {
     isRenderWatcher?: boolean
   ) {
     this.vm = vm
+    console.log(this)
     if (isRenderWatcher) {
       vm._watcher = this
     }
@@ -124,7 +125,7 @@ export default class Watcher {
 
   /**
    * Add a dependency to this directive.
-   */
+   *///添加
   addDep (dep: Dep) {
     const id = dep.id
     if (!this.newDepIds.has(id)) {

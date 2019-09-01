@@ -18,6 +18,7 @@ export default class Dep {
   constructor () {
     this.id = uid++
     this.subs = []
+    // console.log(this)
   }
 //添加选项
   addSub (sub: Watcher) {
