@@ -34,8 +34,10 @@ const sharedPropertyDefinition = {
   get: noop,
   set: noop
 }
-
+//劫持参数
+//target 是vue实例 sourceKey 是_data key是要监听的值
 export function proxy (target: Object, sourceKey: string, key: string) {
+  console.log(target,sourceKey,key)
   sharedPropertyDefinition.get = function proxyGetter () {
     return this[sourceKey][key]
   }

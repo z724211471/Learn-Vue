@@ -30,6 +30,9 @@ let ss=new Vue({
       mess:''
     }
   },
+  props:{
+    name:String
+  },
   extends:myMixin,
   watch: {
     'message.index':{

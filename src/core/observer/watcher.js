@@ -120,6 +120,7 @@ export default class Watcher {
     } finally {
       // "touch" every property so they are all tracked as
       // dependencies for deep watching
+      console.log('nnnn')
       if (this.deep) {
         traverse(value)
       }

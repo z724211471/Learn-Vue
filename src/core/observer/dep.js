@@ -18,11 +18,10 @@ export default class Dep {
   constructor() {
     this.id = uid++
     this.subs = []
-    // console.log(this)
+
   }
   //添加选项
   addSub(sub: Watcher) {
-    console.log(sub)
     this.subs.push(sub)
   }
   //移除选项
@@ -56,13 +55,14 @@ export default class Dep {
 // can be evaluated at a time.
 Dep.target = null
 const targetStack = []
-
+//添加dep
 export function pushTarget(target: ?Watcher) {
   targetStack.push(target)
   Dep.target = target
 }
-
+//删除最后一个值
 export function popTarget() {
   targetStack.pop()
+
   Dep.target = targetStack[targetStack.length - 1]
 }
