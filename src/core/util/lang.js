@@ -32,16 +32,20 @@ export function def (obj: Object, key: string, val: any, enumerable?: boolean) {
  * Parse simple path.
  */
 const bailRE = new RegExp(`[^${unicodeRegExp.source}.$_\\d]`)
+//把字符串'xx.ss 解析成xx[ss]'
 export function parsePath (path: string): any {
   if (bailRE.test(path)) {
     return
   }
   const segments = path.split('.')
+  console.log(segments)
   return function (obj) {
     for (let i = 0; i < segments.length; i++) {
       if (!obj) return
       obj = obj[segments[i]]
+      console.log(obj)
     }
+
     return obj
   }
 }

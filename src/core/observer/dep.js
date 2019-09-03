@@ -15,27 +15,28 @@ export default class Dep {
   id: number;
   subs: Array<Watcher>;
 
-  constructor () {
+  constructor() {
     this.id = uid++
     this.subs = []
     // console.log(this)
   }
-//添加选项
-  addSub (sub: Watcher) {
+  //添加选项
+  addSub(sub: Watcher) {
+    console.log(sub)
     this.subs.push(sub)
   }
-//移除选项
-  removeSub (sub: Watcher) {
+  //移除选项
+  removeSub(sub: Watcher) {
     remove(this.subs, sub)
   }
-//
-  depend () {
+  //
+  depend() {
     if (Dep.target) {
       Dep.target.addDep(this)
     }
   }
-//通知
-  notify () {
+  //通知
+  notify() {
 
     const subs = this.subs.slice()
     if (process.env.NODE_ENV !== 'production' && !config.async) {
@@ -56,12 +57,12 @@ export default class Dep {
 Dep.target = null
 const targetStack = []
 
-export function pushTarget (target: ?Watcher) {
+export function pushTarget(target: ?Watcher) {
   targetStack.push(target)
   Dep.target = target
 }
 
-export function popTarget () {
+export function popTarget() {
   targetStack.pop()
   Dep.target = targetStack[targetStack.length - 1]
 }

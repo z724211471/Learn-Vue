@@ -25,9 +25,24 @@ let ss=new Vue({
     branches: ['master', 'dev'],
     currentBranch: 'master',
     commits: null,
-    message: 'sss'
+    message:{
+      index:1,
+      mess:''
+    }
   },
   extends:myMixin,
+  watch: {
+    'message.index':{
+      handler:function(val,newval){
+        console.log(val,newval)
+      },
+      before:function(data){
+        console.log(data)
+        console.log(this)
+      },
+      deep:true
+    }
+  },
   created: function () {
     this.$nextTick(() => {
       console.log(this.message);

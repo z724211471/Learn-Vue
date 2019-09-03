@@ -55,14 +55,17 @@ export default class Watcher {
       vm._watcher = this
     }
     vm._watchers.push(this)
+    console.log(expOrFn)
     // options
     if (options) {
+      console.log(options)
       this.deep = !!options.deep
       this.user = !!options.user
       this.lazy = !!options.lazy
       this.sync = !!options.sync
       this.before = options.before
     } else {
+      //设置默认值
       this.deep = this.user = this.lazy = this.sync = false
     }
     this.cb = cb
@@ -76,10 +79,12 @@ export default class Watcher {
     this.expression = process.env.NODE_ENV !== 'production'
       ? expOrFn.toString()
       : ''
+
     // parse expression for getter
     if (typeof expOrFn === 'function') {
       this.getter = expOrFn
     } else {
+      console.log(parsePath(expOrFn))
       this.getter = parsePath(expOrFn)
       if (!this.getter) {
         this.getter = noop
@@ -103,6 +108,7 @@ export default class Watcher {
     pushTarget(this)
     let value
     const vm = this.vm
+
     try {
       value = this.getter.call(vm, vm)
     } catch (e) {
@@ -190,6 +196,7 @@ export default class Watcher {
       ) {
         // set new value
         const oldValue = this.value
+        console.log(oldValue)
         this.value = value
         if (this.user) {
           try {
@@ -198,6 +205,7 @@ export default class Watcher {
             handleError(e, this.vm, `callback for watcher "${this.expression}"`)
           }
         } else {
+
           this.cb.call(this.vm, value, oldValue)
         }
       }

@@ -29,7 +29,7 @@
 </head>
 
 <body>
-  <div id="demo">
+  <!-- <div id="demo">
     <h1>Latest Vue.js Commits</h1>
     <template v-for="branch in branches">
       <input type="radio" :id="branch" :value="branch" name="branch" v-model="currentBranch">
@@ -45,12 +45,12 @@
         at <span class="date">{{ record.commit.author.date | formatDate }}</span>
       </li>
     </ul>
-  </div>
+  </div> -->
   <div id="app" >
-    <input v-model="message"></input>
+    <input v-model="message.index"></input>
     {{ message }}
   </div>
-  <script src="mock.js"></script>
+  <!-- <script src="mock.js"></script> -->
   <!-- <script src="app.js"></script> -->
   <script src="main.js"></script>
 </body>
