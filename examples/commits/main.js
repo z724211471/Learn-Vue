@@ -1,9 +1,9 @@
 var apiURL = 'https://api.github.com/repos/vuejs/vue/commits?per_page=3&sha='
 // var VueRouter = require('vue-router')
-const dsa=()=>{
-  let ss='sszz'
+const dsa = () => {
+  let ss = 'sszz'
 }
-dsa.install=function(Vue){
+dsa.install = function (Vue) {
   Object.defineProperty(Vue.prototype, '$router', {
     get() { return Vue }
   })
@@ -19,38 +19,38 @@ var myMixin = {
     }
   }
 }
-let ss=new Vue({
+let ss = new Vue({
   el: '#app',
   data: {
     branches: ['master', 'dev'],
     currentBranch: 'master',
     commits: null,
-    message:{
-      index:1,
-      mess:''
+    message: {
+      index: 1,
+      mess: ''
     }
   },
-  props:{
-    name:String
+  props: {
+    name: String
   },
-  extends:myMixin,
+  extends: myMixin,
   watch: {
-    'message.index':{
-      handler:function(val,newval){
-        console.log(val,newval)
+    'message.index': {
+      handler: function (val, newval) {
+        // console.log(val,newval)
       },
-      before:function(data){
-        console.log(data)
-        console.log(this)
+      before: function (data) {
+        // console.log(data)
+        // console.log(this)
       },
-      deep:true
+      deep: true
     }
   },
   created: function () {
     this.$nextTick(() => {
-      console.log(this.message);
+      // console.log(this.message);
     })
-    console.log(this.$router);
+    // console.log(this.$router);
   },
 })
 

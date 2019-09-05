@@ -10,7 +10,7 @@ export const unicodeRegExp = /a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037
 /**
  * Check if a string starts with $ or _
  */
-export function isReserved (str: string): boolean {
+export function isReserved(str: string): boolean {
   const c = (str + '').charCodeAt(0)
   return c === 0x24 || c === 0x5F
 }
@@ -19,7 +19,7 @@ export function isReserved (str: string): boolean {
  * Define a property.
  */
 //方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
-export function def (obj: Object, key: string, val: any, enumerable?: boolean) {
+export function def(obj: Object, key: string, val: any, enumerable?: boolean) {
   Object.defineProperty(obj, key, {
     value: val,
     enumerable: !!enumerable,
@@ -32,8 +32,8 @@ export function def (obj: Object, key: string, val: any, enumerable?: boolean) {
  * Parse simple path.
  */
 const bailRE = new RegExp(`[^${unicodeRegExp.source}.$_\\d]`)
-//把字符串'xx.ss 解析成xx[ss]'
-export function parsePath (path: string): any {
+//把字符串'xx.ss 解析成xx[ss] 可以获取对象的参数'
+export function parsePath(path: string): any {
   if (bailRE.test(path)) {
     return
   }

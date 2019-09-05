@@ -25,7 +25,13 @@ const ALWAYS_NORMALIZE = 2
 
 // wrapper function for providing a more flexible interface
 // without getting yelled at by flow
-export function createElement (
+//context 执行的上下文 一般指向vue
+//tag 添加元素的名字 如div input 等
+//data 绑定在元素上的方法 比如v-model click 等
+//children 没有就是undefined 元素下面的子元素 是vnode格式
+//normalizationType //判断是否是数组格式 是数组执行normalizeArrayChildren这个方法 否则执行normalizeChildren 主要应用v-for
+
+export function createElement(
   context: Component,
   tag: any,
   data: any,
@@ -41,10 +47,11 @@ export function createElement (
   if (isTrue(alwaysNormalize)) {
     normalizationType = ALWAYS_NORMALIZE
   }
+  console.log(context, tag, data, children, normalizationType)
   return _createElement(context, tag, data, children, normalizationType)
 }
 
-export function _createElement (
+export function _createElement(
   context: Component,
   tag?: string | Class<Component> | Function | Object,
   data?: VNodeData,
@@ -135,7 +142,7 @@ export function _createElement (
   }
 }
 
-function applyNS (vnode, ns, force) {
+function applyNS(vnode, ns, force) {
   vnode.ns = ns
   if (vnode.tag === 'foreignObject') {
     // use default namespace inside foreignObject
@@ -156,7 +163,7 @@ function applyNS (vnode, ns, force) {
 // ref #5318
 // necessary to ensure parent re-render when deep bindings like :style and
 // :class are used on slot nodes
-function registerDeepBindings (data) {
+function registerDeepBindings(data) {
   if (isObject(data.style)) {
     traverse(data.style)
   }

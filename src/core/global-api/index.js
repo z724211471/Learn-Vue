@@ -52,10 +52,10 @@ export function initGlobalAPI(Vue: GlobalAPI) {
   Vue.observable = <T>(obj: T): T => {
     observe(obj)
    return obj
-   }
-    Vue.options = Object.create(null)
+    }
+     Vue.options = Object.create(null)
 
-    //ASSET_TYPES=["component", "directive", "filter"]
+     //ASSET_TYPES=["component", "directive", "filter"]
   ASSET_TYPES.forEach(type => {
       Vue.options[type + 's'] = Object.create(null)
     })
@@ -72,6 +72,5 @@ export function initGlobalAPI(Vue: GlobalAPI) {
   //也是混入
   initExtend(Vue)
   //初始化选项与资源的api
-  console.log('123')
   initAssetRegisters(Vue)
 }
