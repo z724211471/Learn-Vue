@@ -1,15 +1,24 @@
-var apiURL = 'https://api.github.com/repos/vuejs/vue/commits?per_page=3&sha='
+var apiURL='https://api.github.com/repos/vuejs/vue/commits?per_page=3&sha='
 // var VueRouter = require('vue-router')
-const dsa = () => {
-  let ss = 'sszz'
+const dsa=() => {
+  let ss='sszz'
 }
-dsa.install = function (Vue) {
+dsa.install=function (Vue) {
   Object.defineProperty(Vue.prototype, '$router', {
     get() { return Vue }
   })
 }
+let coms=Vue.component('button-counter', {
+  data: function () {
+    return {
+      count: 0
+    }
+  },
+  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+})
+console.log(Vue.component)
 Vue.use(dsa)
-var myMixin = {
+var myMixin={
   created: function () {
     this.hello()
   },
@@ -19,7 +28,7 @@ var myMixin = {
     }
   }
 }
-let ss = new Vue({
+let ss=new Vue({
   el: '#app',
   data: {
     branches: ['master', 'dev'],
@@ -34,6 +43,9 @@ let ss = new Vue({
     name: String
   },
   extends: myMixin,
+  components: {
+    'button-counter': coms
+  },
   watch: {
     'message.index': {
       handler: function (val, newval) {
@@ -48,10 +60,11 @@ let ss = new Vue({
   },
   created: function () {
     this.$nextTick(() => {
-      // console.log(this.message);
+      console.log(this);
     })
     // console.log(this.$router);
   },
+
 })
 
 
