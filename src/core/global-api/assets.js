@@ -11,7 +11,7 @@ export function initAssetRegisters(Vue: GlobalAPI) {
   ASSET_TYPES.forEach(type => {
     Vue[type]=function (
       id: string,
-      definition: Function|Object
+.definition: Function|Object
     ): Function|Object|void {
       if (!definition) {
         return this.options[type+'s'][id]
