@@ -16,7 +16,7 @@ import Dep, { pushTarget, popTarget } from './dep'
 
 import type { SimpleSet } from '../util/index'
 
-let uid = 0
+let uid=0
 
 /**
  * A watcher parses an expression, collects dependencies,
@@ -44,57 +44,57 @@ export default class Watcher {
 
   constructor(
     vm: Component,
-    expOrFn: string | Function,
+    expOrFn: string| Function,
     cb: Function,
     options?: ?Object,
     isRenderWatcher?: boolean
   ) {
-    this.vm = vm
+    this.vm=vm
     if (isRenderWatcher) {
-      vm._watcher = this
+      vm._watcher=this
     }
     vm._watchers.push(this)
     // options
     if (options) {
-      this.deep = !!options.deep
-      this.user = !!options.user
-      this.lazy = !!options.lazy
-      this.sync = !!options.sync
-      this.before = options.before
+      this.deep=!!options.deep
+      this.user=!!options.user
+      this.lazy=!!options.lazy
+      this.sync=!!options.sync
+      this.before=options.before
     } else {
       //设置默认值
-      this.deep = this.user = this.lazy = this.sync = false
+      this.deep=this.user=this.lazy=this.sync=false
     }
-    this.cb = cb
-    this.id = ++uid // uid for batching
-    this.active = true
-    this.dirty = this.lazy // for lazy watchers
-    this.deps = []
-    this.newDeps = []
-    this.depIds = new Set()
-    this.newDepIds = new Set()
-    this.expression = process.env.NODE_ENV !== 'production'
+    this.cb=cb
+    this.id=++uid // uid for batching
+    this.active=true
+    this.dirty=this.lazy // for lazy watchers
+    this.deps=[]
+    this.newDeps=[]
+    this.depIds=new Set()
+    this.newDepIds=new Set()
+    this.expression=process.env.NODE_ENV!=='production'
       ? expOrFn.toString()
-      : ''
+      :''
 
     // parse expression for getter
-    if (typeof expOrFn === 'function') {
-      this.getter = expOrFn
+    if (typeof expOrFn==='function') {
+      this.getter=expOrFn
     } else {
-      this.getter = parsePath(expOrFn)
+      this.getter=parsePath(expOrFn)
       if (!this.getter) {
-        this.getter = noop
-        process.env.NODE_ENV !== 'production' && warn(
-          `Failed watching path: "${expOrFn}" ` +
-          'Watcher only accepts simple dot-delimited paths. ' +
+        this.getter=noop
+        process.env.NODE_ENV!=='production'&&warn(
+          `Failed watching path: "${expOrFn}" `+
+          'Watcher only accepts simple dot-delimited paths. '+
           'For full control, use a function instead.',
           vm
         )
       }
     }
-    this.value = this.lazy
+    this.value=this.lazy
       ? undefined
-      : this.get()
+      :this.get()
   }
 
   /**
@@ -103,10 +103,10 @@ export default class Watcher {
   get() {
     pushTarget(this)
     let value
-    const vm = this.vm
+    const vm=this.vm
 
     try {
-      value = this.getter.call(vm, vm)
+      value=this.getter.call(vm, vm)
     } catch (e) {
       if (this.user) {
         handleError(e, vm, `getter for watcher "${this.expression}"`)
@@ -116,7 +116,6 @@ export default class Watcher {
     } finally {
       // "touch" every property so they are all tracked as
       // dependencies for deep watching
-      console.log('nnnn')
       if (this.deep) {
         traverse(value)
       }
@@ -130,7 +129,7 @@ export default class Watcher {
    * Add a dependency to this directive.
    *///添加
   addDep(dep: Dep) {
-    const id = dep.id
+    const id=dep.id
     if (!this.newDepIds.has(id)) {
       this.newDepIds.add(id)
       this.newDeps.push(dep)
@@ -144,21 +143,21 @@ export default class Watcher {
    * Clean up for dependency collection.
    */
   cleanupDeps() {
-    let i = this.deps.length
+    let i=this.deps.length
     while (i--) {
-      const dep = this.deps[i]
+      const dep=this.deps[i]
       if (!this.newDepIds.has(dep.id)) {
         dep.removeSub(this)
       }
     }
-    let tmp = this.depIds
-    this.depIds = this.newDepIds
-    this.newDepIds = tmp
+    let tmp=this.depIds
+    this.depIds=this.newDepIds
+    this.newDepIds=tmp
     this.newDepIds.clear()
-    tmp = this.deps
-    this.deps = this.newDeps
-    this.newDeps = tmp
-    this.newDeps.length = 0
+    tmp=this.deps
+    this.deps=this.newDeps
+    this.newDeps=tmp
+    this.newDeps.length=0
   }
 
   /**
@@ -168,7 +167,7 @@ export default class Watcher {
   update() {
     /* istanbul ignore else */
     if (this.lazy) {
-      this.dirty = true
+      this.dirty=true
     } else if (this.sync) {
       this.run()
     } else {
@@ -182,19 +181,19 @@ export default class Watcher {
    */
   run() {
     if (this.active) {
-      const value = this.get()
+      const value=this.get()
       if (
-        value !== this.value ||
+        value!==this.value||
         // Deep watchers and watchers on Object/Arrays should fire even
         // when the value is the same, because the value may
         // have mutated.
-        isObject(value) ||
+        isObject(value)||
         this.deep
       ) {
         // set new value
-        const oldValue = this.value
+        const oldValue=this.value
         console.log(oldValue)
-        this.value = value
+        this.value=value
         if (this.user) {
           try {
             this.cb.call(this.vm, value, oldValue)
@@ -214,15 +213,15 @@ export default class Watcher {
    * This only gets called for lazy watchers.
    */
   evaluate() {
-    this.value = this.get()
-    this.dirty = false
+    this.value=this.get()
+    this.dirty=false
   }
 
   /**
    * Depend on all deps collected by this watcher.
    */
   depend() {
-    let i = this.deps.length
+    let i=this.deps.length
     while (i--) {
       this.deps[i].depend()
     }
@@ -239,11 +238,11 @@ export default class Watcher {
       if (!this.vm._isBeingDestroyed) {
         remove(this.vm._watchers, this)
       }
-      let i = this.deps.length
+      let i=this.deps.length
       while (i--) {
         this.deps[i].removeSub(this)
       }
-      this.active = false
+      this.active=false
     }
   }
 }

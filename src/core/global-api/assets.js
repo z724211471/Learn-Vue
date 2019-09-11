@@ -11,8 +11,8 @@ export function initAssetRegisters(Vue: GlobalAPI) {
   ASSET_TYPES.forEach(type => {
     Vue[type]=function (
       id: string,
-.definition: Function|Object
-    ): Function|Object|void {
+      definition: Function| Object
+    ): Function|Object| void {
       if (!definition) {
         return this.options[type+'s'][id]
       } else {
@@ -23,7 +23,6 @@ export function initAssetRegisters(Vue: GlobalAPI) {
         if (type==='component'&&isPlainObject(definition)) {
           definition.name=definition.name||id
           definition=this.options._base.extend(definition)
-          console.log(this.options._base.extend()
         }
         if (type==='directive'&&typeof definition==='function') {
           definition={ bind: definition, update: definition }

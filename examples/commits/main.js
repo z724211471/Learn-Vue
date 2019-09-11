@@ -34,10 +34,12 @@ let ss=new Vue({
     branches: ['master', 'dev'],
     currentBranch: 'master',
     commits: null,
+    lists: [],
     message: {
       index: 1,
       mess: ''
-    }
+    },
+    total: 100000,
   },
   props: {
     name: String
@@ -62,7 +64,10 @@ let ss=new Vue({
     this.$nextTick(() => {
       console.log(this);
     })
+    this.loop(this.total, 0);
     // console.log(this.$router);
+  },
+  methods: {
   },
 
 })
