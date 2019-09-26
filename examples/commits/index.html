@@ -50,9 +50,9 @@
     <input v-model="message.index"></input>
     {{ message }}
     <span v-for='item in branches'>{{item}}</span>
-    <button-counter></button-counter>
+    <button-counter><div slot='header'>sssss</div></button-counter>
     <ul>
-      <li v-for='items in lists'>{{items}}</li>
+      <li v-for='items in lists'><a>{{items}}</a></li>
     </ul>
   </div>
   <!-- <script src="mock.js"></script> -->

@@ -95,7 +95,7 @@ export function toString(val: any): string {
  * Convert an input value to a number for persistence.
  * If the conversion fails, return original string.
  */
-export function toNumber(val: string): number|string {
+export function toNumber(val: string): number | string {
   const n=parseFloat(val)
   return isNaN(n)? val:n
 }
@@ -107,7 +107,7 @@ export function toNumber(val: string): number|string {
 export function makeMap(
   str: string,
   expectsLowerCase?: boolean
-): (key: string) => true|void {
+): (key: string) => true | void {
   const map=Object.create(null)
   const list: Array<string>=str.split(',')
   for (let i=0; i<list.length; i++) {
@@ -131,8 +131,8 @@ export const isReservedAttribute=makeMap('key,ref,slot,slot-scope,is')
 
 /**
  * Remove an item from an array.
- */
-export function remove(arr: Array<any>, item: any): Array<any>|void {
+ */ //返回移除了对应元素的数组
+export function remove(arr: Array<any>, item: any): Array<any> | void {
   if (arr.length) {
     const index=arr.indexOf(item)
     if (index>-1) {
@@ -145,7 +145,7 @@ export function remove(arr: Array<any>, item: any): Array<any>|void {
  * Check whether an object has the property.
  */
 const hasOwnProperty=Object.prototype.hasOwnProperty
-export function hasOwn(obj: Object|Array<*>, key: string): boolean {
+export function hasOwn(obj: Object | Array<*>, key: string): boolean {
   return hasOwnProperty.call(obj, key)
 }
 

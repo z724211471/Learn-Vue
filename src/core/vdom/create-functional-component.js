@@ -75,6 +75,7 @@ export function FunctionalRenderContext (
     this.$scopedSlots = normalizeScopedSlots(data.scopedSlots, this.$slots)
   }
 
+
   if (options._scopeId) {
     this._c = (a, b, c, d) => {
       const vnode = createElement(contextVm, a, b, c, d, needNormalization)

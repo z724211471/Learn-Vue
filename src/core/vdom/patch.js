@@ -29,9 +29,8 @@ import {
 } from '../util/index'
 
 export const emptyNode = new VNode('', {}, [])
-
 const hooks = ['create', 'activate', 'update', 'remove', 'destroy']
-
+//判断是否是相同的Vnode
 function sameVnode (a, b) {
   return (
     a.key === b.key && (
@@ -48,7 +47,7 @@ function sameVnode (a, b) {
     )
   )
 }
-
+//判断两个input 是否相同
 function sameInputType (a, b) {
   if (a.tag !== 'input') return true
   let i
@@ -68,6 +67,7 @@ function createKeyToOldIdx (children, beginIdx, endIdx) {
 }
 
 export function createPatchFunction (backend) {
+  console.log(backend)
   let i, j
   const cbs = {}
 
@@ -131,12 +131,14 @@ export function createPatchFunction (backend) {
     ownerArray,
     index
   ) {
+    //如果vnode的elm不等于undefined和ownerArray不能等于undefined
     if (isDef(vnode.elm) && isDef(ownerArray)) {
       // This vnode was used in a previous render!
       // now it's used as a new node, overwriting its elm would cause
       // potential patch errors down the road when it's used as an insertion
       // reference node. Instead, we clone the node on-demand before creating
       // associated DOM element for it.
+      //克隆一个vnode
       vnode = ownerArray[index] = cloneVNode(vnode)
     }
 
@@ -268,7 +270,7 @@ export function createPatchFunction (backend) {
     // a reactivated keep-alive component doesn't insert itself
     insert(parentElm, vnode.elm, refElm)
   }
-
+//插入vnode
   function insert (parent, elm, ref) {
     if (isDef(parent)) {
       if (isDef(ref)) {
@@ -280,7 +282,7 @@ export function createPatchFunction (backend) {
       }
     }
   }
-
+  //创建子项
   function createChildren (vnode, children, insertedVnodeQueue) {
     if (Array.isArray(children)) {
       if (process.env.NODE_ENV !== 'production') {
@@ -315,6 +317,7 @@ export function createPatchFunction (backend) {
   // set scope id attribute for scoped CSS.
   // this is implemented as a special case to avoid the overhead
   // of going through the normal attribute patching process.
+  //
   function setScope (vnode) {
     let i
     if (isDef(i = vnode.fnScopeId)) {
@@ -427,19 +430,23 @@ export function createPatchFunction (backend) {
       } else if (isUndef(oldEndVnode)) {
         oldEndVnode = oldCh[--oldEndIdx]
       } else if (sameVnode(oldStartVnode, newStartVnode)) {
+        //如果老的vnode跟新的vnode开始的节点一样执行的方法
         patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
         oldStartVnode = oldCh[++oldStartIdx]
         newStartVnode = newCh[++newStartIdx]
       } else if (sameVnode(oldEndVnode, newEndVnode)) {
+         //如果老的vnode跟新的vnode结束的节点一样执行的方法
         patchVnode(oldEndVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)
         oldEndVnode = oldCh[--oldEndIdx]
         newEndVnode = newCh[--newEndIdx]
       } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right
+        //如果老的vnode开始的节点跟新的vnode结束的节点一样执行的方法
         patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue, newCh, newEndIdx)
         canMove && nodeOps.insertBefore(parentElm, oldStartVnode.elm, nodeOps.nextSibling(oldEndVnode.elm))
         oldStartVnode = oldCh[++oldStartIdx]
         newEndVnode = newCh[--newEndIdx]
       } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
+        //如果老的vnode结束的节点跟新的vnode开始的节点一样执行的方法
         patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
         canMove && nodeOps.insertBefore(parentElm, oldEndVnode.elm, oldStartVnode.elm)
         oldEndVnode = oldCh[--oldEndIdx]
@@ -506,12 +513,16 @@ export function createPatchFunction (backend) {
     index,
     removeOnly
   ) {
+
+    console.log(oldVnode)
+    console.log(vnode)
     if (oldVnode === vnode) {
       return
     }
 
     if (isDef(vnode.elm) && isDef(ownerArray)) {
       // clone reused vnode
+      //克隆重用的vnode
       vnode = ownerArray[index] = cloneVNode(vnode)
     }
 
@@ -593,6 +604,7 @@ export function createPatchFunction (backend) {
   const isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key')
 
   // Note: this is a browser-only function so we can assume elms are DOM nodes.
+ // Note: 这是一个仅用于浏览器的功能，因此我们可以假定elms是DOM节点。
   function hydrate (elm, vnode, insertedVnodeQueue, inVPre) {
     let i
     const { tag, data, children } = vnode
@@ -693,11 +705,16 @@ export function createPatchFunction (backend) {
         vnode.tag.toLowerCase() === (node.tagName && node.tagName.toLowerCase())
       )
     } else {
+      //8代表注释 3 代表元素或属性中的文本内容。
       return node.nodeType === (vnode.isComment ? 8 : 3)
     }
   }
 
   return function patch (oldVnode, vnode, hydrating, removeOnly) {
+    console.log(oldVnode)
+    console.log(vnode)
+    console.log(hydrating)
+    console.log(removeOnly)
     if (isUndef(vnode)) {
       if (isDef(oldVnode)) invokeDestroyHook(oldVnode)
       return

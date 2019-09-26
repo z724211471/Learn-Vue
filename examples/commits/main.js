@@ -14,7 +14,7 @@ let coms=Vue.component('button-counter', {
       count: 0
     }
   },
-  template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  template: '<div><slot name="header"></slot></div>'
 })
 console.log(Vue.component)
 Vue.use(dsa)
