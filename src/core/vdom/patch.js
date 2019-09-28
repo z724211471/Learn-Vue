@@ -67,7 +67,6 @@ function createKeyToOldIdx (children, beginIdx, endIdx) {
 }
 
 export function createPatchFunction (backend) {
-  console.log(backend)
   let i, j
   const cbs = {}
 
