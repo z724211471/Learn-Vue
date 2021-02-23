@@ -16,7 +16,7 @@ let coms=Vue.component('button-counter', {
   },
   template: '<div><slot name="header"></slot></div>'
 })
-console.log(Vue.component)
+
 Vue.use(dsa)
 var myMixin={
   created: function () {

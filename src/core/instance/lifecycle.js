@@ -57,6 +57,7 @@ export function initLifecycle(vm: Component) {
 }
 //子组件会调用该方法 混入
 export function lifecycleMixin(Vue: Class<Component>) {
+  console.log('asd')
   Vue.prototype._update=function (vnode: VNode, hydrating?: boolean) {
     const vm: Component=this
     const prevEl=vm.$el

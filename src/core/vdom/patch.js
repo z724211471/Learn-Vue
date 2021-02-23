@@ -512,9 +512,6 @@ export function createPatchFunction (backend) {
     index,
     removeOnly
   ) {
-
-    console.log(oldVnode)
-    console.log(vnode)
     if (oldVnode === vnode) {
       return
     }
@@ -710,10 +707,6 @@ export function createPatchFunction (backend) {
   }
 
   return function patch (oldVnode, vnode, hydrating, removeOnly) {
-    console.log(oldVnode)
-    console.log(vnode)
-    console.log(hydrating)
-    console.log(removeOnly)
     if (isUndef(vnode)) {
       if (isDef(oldVnode)) invokeDestroyHook(oldVnode)
       return
